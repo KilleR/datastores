@@ -1,4 +1,4 @@
-package godatastore
+package datastores
 //###########################
 // Memory storage structures
 //###########################
