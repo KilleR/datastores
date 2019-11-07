@@ -34,3 +34,15 @@ func (ds *DataStore) setAll(data map[string]string) {
 
 	ds.cache = data
 }
+
+func (ds *DataStore) unset(key string) bool {
+	ds.Lock()
+	defer ds.Unlock()
+
+ 	_, ok := ds.cache[key]
+	if ok {
+		delete(ds.cache, key)
+		return true
+	}
+	return false
+}
