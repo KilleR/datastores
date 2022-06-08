@@ -17,28 +17,28 @@ func NewDataStore[K comparable, V any]() *DataStore[K, V] {
 	}
 }
 
-func (ds *DataStore[K, V]) set(key K, value V) {
+func (ds *DataStore[K, V]) Set(key K, value V) {
 	ds.Lock()
 	defer ds.Unlock()
 
 	ds.cache[key] = value
 }
 
-func (ds *DataStore[K, V]) get(key K) V {
+func (ds *DataStore[K, V]) Get(key K) V {
 	ds.RLock()
 	defer ds.RUnlock()
 
 	return ds.cache[key]
 }
 
-func (ds *DataStore[K, V]) setAll(data map[K]V) {
+func (ds *DataStore[K, V]) SetAll(data map[K]V) {
 	ds.Lock()
 	defer ds.Unlock()
 
 	ds.cache = data
 }
 
-func (ds *DataStore[K, V]) unset(key K) bool {
+func (ds *DataStore[K, V]) Unset(key K) bool {
 	ds.Lock()
 	defer ds.Unlock()
 
