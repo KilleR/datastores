@@ -2,7 +2,7 @@ package datastores
 
 import "sync"
 
-//###########################
+// DataStore ###########################
 // Memory storage structures
 //###########################
 // Generic data store
@@ -36,6 +36,12 @@ func (ds *DataStore[K, V]) SetAll(data map[K]V) {
 	defer ds.Unlock()
 
 	ds.cache = data
+}
+func (ds *DataStore[K, V]) GetAll() map[K]V {
+	ds.RLock()
+	defer ds.RUnlock()
+
+	return ds.cache
 }
 
 func (ds *DataStore[K, V]) Unset(key K) bool {
